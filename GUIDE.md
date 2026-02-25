@@ -126,7 +126,7 @@ my-app/
 └── package.json
 ```
 Here, the layout.tsx does not say which files it is not clear which files it loads first.
-```
+```tsx
 import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
@@ -192,7 +192,7 @@ The parent page `page.tsx` under the `app/` folder.
 If you open this file you will notice that it injects multiple pages or components inside of it.
 
 *Notice the syntax — `<SomeComponent/>`. `<AgentPanel />` and `<ChatKitPanel />` are components being placed directly on the page. In React, a page is built by combining many small, self-contained components. You create the UI by stacking these components together, like Lego blocks.*
-```
+```tsx
 return (
     <main className="flex h-screen gap-2 bg-gray-100 p-2">
       <AgentPanel
