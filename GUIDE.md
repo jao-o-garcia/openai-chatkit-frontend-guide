@@ -191,7 +191,7 @@ my-app/
 The parent page `page.tsx` under the `app/` folder.
 If you open this file you will notice that it injects multiple pages or components inside of it.
 
-*(Note: Syntax for injecting is <SomeComponent/> (this format alone already is calling the component)*
+*Notice the syntax — `<SomeComponent/>`. `<AgentPanel />` and `<ChatKitPanel />` are components being placed directly on the page. In React, a page is built by combining many small, self-contained components. You create the UI by stacking these components together, like Lego blocks.*
 ```
 return (
     <main className="flex h-screen gap-2 bg-gray-100 p-2">
@@ -213,3 +213,45 @@ return (
 ```
 
 The `page` file is a reserved word for Next.js. If you name it differently (i.e. HomePage) Next.js won't treat it as a page.
+
+
+## Reserved file names for Next.js
+**`page.tsx`** — Defines the UI for a route. This is what the user actually sees when they visit a URL. Without this file, the route doesn't exist.
+
+**`layout.tsx`** — A wrapper that persists around pages. When you navigate between routes, the layout stays mounted — it doesn't re-render. Good for navbars, sidebars, fonts, global scripts.
+
+**`error.tsx`** — Automatically shown when something throws an error inside that route. Think of it as a try/catch but for UI. Must be a client component ("use client").
+not-found.tsx — Shown when you call notFound() from Next.js, or when a route simply doesn't exist (404).
+
+**`route.ts`** — Turns a folder into an API endpoint instead of a page. You export functions named after HTTP methods and Next.js wires them up automatically:
+```
+export async function GET(request: Request) { ... }
+export async function POST(request: Request) { ... }
+```
+**`loading.tsx`** — Automatically shown while a page is loading. Next.js wraps it in a Suspense boundary for you behind the scenes.
+
+**`template.tsx`** — Similar to `layout.tsx` but it *does* re-render on every navigation. Less common, but useful if you need fresh state on every route visit.
+
+**`default.tsx`** — Used in parallel routes (an advanced feature). Acts as a fallback when Next.js can't determine which slot to render.
+
+**`middleware.ts`** — Lives at the root of the project, not inside `app/`. Runs *before* a request reaches any page. Used for auth checks, redirects, and header manipulation.
+
+### How They Layer Together
+
+When someone visits a route, Next.js stacks these files in order:
+```
+layout.tsx        ← outermost wrapper
+  template.tsx    ← re-renders on navigation
+    error.tsx     ← catches errors below it
+      loading.tsx ← shown while page loads
+        page.tsx  ← the actual content
+```
+
+## Important Educational Links
+**React and Next.js **: https://nextjs.org/learn/react-foundations
+
+## Caution
+In our examples in Next.js we followed the App router approach. There is also a Page router. 
+
+
+
