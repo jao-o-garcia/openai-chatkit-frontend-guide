@@ -1,7 +1,4 @@
-# Next JS, React, JS SPEEDRUN
-
-
-
+# Next.js Speedrun — Concepts You'll Need Along the Way
 
 
 ## Destructuring: 
@@ -39,3 +36,60 @@ fetchCardData() {
 ```
 The reason why this works is because destructing comes from the concept of getting specific elements in an array: 
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring
+
+
+
+## Fetching Data
+Two options:
+
+Option 1: Traditional / Client Fetching
+```
+Browser (React) → Next.js API Route → Database
+```
+You use fetch("/api/users") inside useEffect.
+``` tsx
+useEffect(() => {
+  fetch("/api/users")
+    .then(res => res.json())
+    .then(setUsers);
+}, []);
+```
+This exists because client-side React runs in the user’s browser.
+```
+const users = await sql`SELECT * FROM users`;
+```
+Option 2: No API Layer (React Server Components)
+Flow:
+```
+Server Component → Database
+(never touches browser)
+```
+
+```tsx
+export default async function Page() {
+  const users = await sql`SELECT * FROM users`;
+  return <div>{users.length}</div>;
+}
+```
+
+When you DO NOT need an API
+
+Reading data during page render.
+Examples:
+
+- dashboard statistics
+- invoices list
+- blog posts
+- product catalog
+- admin overview
+
+When you still need an API layer:
+| Feature                   | Needs API? | Why                       |
+| ------------------------- | ---------- | ------------------------- |
+| Login form                | YES        | browser sends credentials |
+| Button click mutation     | YES        | user action               |
+| Polling                   | YES        | client repeatedly asks    |
+| Mobile app / external app | YES        | not a server component    |
+
+This is because when Server Component only runs when the page loads on the server. User interaction = API required.
+See more on: https://nextjs.org/learn/dashboard-app/fetching-data#choosing-how-to-fetch-data
