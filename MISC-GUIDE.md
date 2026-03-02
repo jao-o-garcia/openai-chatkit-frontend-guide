@@ -93,3 +93,10 @@ When you still need an API layer:
 
 This is because when Server Component only runs when the page loads on the server. User interaction = API required.
 See more on: https://nextjs.org/learn/dashboard-app/fetching-data#choosing-how-to-fetch-data
+
+## Route Groups
+![Overview](https://nextjs.org/_next/image?url=https%3A%2F%2Fh8DxKfmAPhn8O0p3.public.blob.vercel-storage.com%2Flearn%2Fdark%2Froute-group.png&w=1920&q=75)
+
+Route groups allow you to organize files into logical groups without affecting the URL path structure. When you create a new folder using parentheses (), the name won't be included in the URL path. So /dashboard/(overview)/page.tsx becomes /dashboard.
+
+- This is useful for loading skeletons. 
