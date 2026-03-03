@@ -255,9 +255,6 @@ In our examples in Next.js we followed the App router approach. There is also a 
 
 
 # Plugging in Chatkit in frontend
-## Check List for Next.JS architecture
-- [ ] Is architecture in Next.Js?
-    - [ ] Does the config files have next.config?
 
 ## Check List for vite + react architecture        
 - [ ] Is the architecture in React + Vite?
@@ -267,11 +264,25 @@ In our examples in Next.js we followed the App router approach. There is also a 
   - *Trace where Chatkit Panel is starting from index.html*
       - [ ] Does the ChatKitPanel component have the useChatKit function?
         - [ ] Is the api.url pointed to your website page that contains the chatkit panel?
-          - [ ] Does the api url connected contain the base url? (i.e. www.customersupport.com/support) 
+          - [ ] Does the connected api url  contain the base url? (i.e. www.customersupport.com/support) 
           - [ ] Does the base url append with (/chatkit) to create the api url? (www.customersupport.com/support/chatkit)
         - [ ] Does it contain the DomainKey taken from OpenAI platform?
         - [ ] Does the useChatKit function return a ChatKit Control component `<ChatKit control={chatkit.control} />?`?
-
+           
+## Check List for Next.JS architecture
+- [ ] Is architecture in Next.Js (rewrite)?
+    - [ ] Does package.json have @openai/chatkit AND @openai/chatkit-react?
+    - [ ] Does next.config contain the proxy for the backend?
+    - [ ] Does app/layout.tsx load the ChatKit CDN script?
+          (`<Script src="https://cdn.platform.openai.com/deployments/chatkit/chatkit.js" strategy="beforeInteractive" />`)
+    - [ ] Does app/layout.tsx render {children}?
+      -  *Trace where ChatKitPanel is by starting from app/page*
+          - [ ] Does app/page.tsx (and chatkit-panel.tsx) have "use client" at the top?
+          - [ ] Does the ChatKitPanel component have the useChatKit function?
+            - [ ] Is api.url set (relative "/chatkit" or absolute)?
+            - [ ] Does it contain the DomainKey taken from OpenAI platform?
+            - [ ] Does the useChatKit function return a ChatKit Control component `<ChatKit control={chatkit.control} />?`?
+      
 ## Check List for the backend server
 - ☐ Is the backend server setup/working?
   - ☐ Does the backend server side have a chatkit server?
