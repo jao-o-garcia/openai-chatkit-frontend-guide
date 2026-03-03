@@ -254,4 +254,26 @@ layout.tsx        ← outermost wrapper
 In our examples in Next.js we followed the App router approach. There is also a Page router. 
 
 
+# Plugging in Chatkit in frontend
+## Check List for Next.JS architecture
+- [ ] Is architecture in Next.Js?
+    - [ ] Does the config files have next.config?
+
+## Check List for vite + react architecture        
+- [ ] Is the architecture in React + Vite?
+  - [ ] Does package.json have @openai/chatkit-react as a dependency?
+  - [ ] Does index.html include the CDN script https://cdn.platform.openai.com/deployments/chatkit/chatkit.js?
+  - [ ] Does vite.config.ts proxy the ChatKit API path (e.g. /chatkit) to the backend?
+  - *Trace where Chatkit Panel is starting from index.html*
+      - [ ] Does the ChatKitPanel component have the useChatKit function?
+        - [ ] Is the api.url pointed to your website page that contains the chatkit panel?
+          - [ ] Does the api url connected contain the base url? (i.e. www.customersupport.com/support) 
+          - [ ] Does the base url append with (/chatkit) to create the api url? (www.customersupport.com/support/chatkit)
+        - [ ] Does it contain the DomainKey taken from OpenAI platform?
+        - [ ] Does the useChatKit function return a ChatKit Control component `<ChatKit control={chatkit.control} />?`?
+
+## Check List for the backend server
+- ☐ Is the backend server setup/working?
+  - ☐ Does the backend server side have a chatkit server?
+  - ☐ Does the backend server side have a chatkit store (memory store)?
 
