@@ -1,10 +1,12 @@
 # OpenAI Chatkit Guide for Integrating Your Web frontend
 
-There are two setup examples from openai that we can use as a guide. All options can be in production, but how much control you want would depend on the category that you will choose.
+There are two setup examples from openai that we can use as a guide. All options can be in production, but how much control you want would depend on the category that you will choose. 
 
 ## Basic:
-Considering you just want to use Agent Builder and plug it in 
+Considering you just want to use the easy Agent Builder. A short summary is that instead of having your own url for your server, you will connect it directly to openai's server.
+Instead of having another api layer (like your own backend) be pointed by the useChatKit hook, it will POST directly to POST https://api.openai.com/v1/chatkit/sessions together with your OPENAI API key and your Workflow ID.
 
+If you want to see a more detailed comparison between the Basic and the Advanced see: [Agent Builder Comparison with Own Server](AGENT-BUILDER-ARCHITECTURE.md)
 
 ## Advanced:
 Considering that you have now setup your backend server, both can be setup into
